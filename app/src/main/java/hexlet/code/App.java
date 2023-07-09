@@ -28,7 +28,7 @@ public final class App {
         return templateEngine;
     }
     private static void addRoutes(Javalin app) {
-        app.get("/", ctx -> ctx.result("Hello world"));
+        app.get("/", ctx -> ctx.render("index.html"));
     }
     public static Javalin getApp() {
         Javalin app = Javalin.create(config -> {
