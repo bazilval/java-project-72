@@ -18,8 +18,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <div class="navbar-nav">
-                            <a class="nav-link" th:classappend="(@{''} == '')? 'active'" aria-current="page" href="/">Главная</a>
-                            <a class="nav-link" th:classappend="(@{''} == 'urls')? 'active'" href="/urls">Сайты</a>
+                            <a class="nav-link" th:classappend="${isIndex} ? 'active'" href="/">Главная</a>
+                            <a class="nav-link" th:classappend="${!isIndex} ? 'active'" href="/urls">Сайты</a>
                         </div>
                     </div>
                 </div>
@@ -33,9 +33,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
-            <div class="container-fluid bg-dark p-5">
-                <section layout:fragment="content"></section>
-            </div>
+            <section layout:fragment="content"></section>
         </main>
 
         <footer class="footer border-top py-3 mt-5 bg-light">
@@ -44,3 +42,4 @@
             </div>
         </footer>
     </body>
+</html>

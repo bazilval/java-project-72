@@ -8,14 +8,15 @@ import javax.persistence.Id;
 import java.time.Instant;
 
 @Entity
-public class Url extends Model {
+public final class Url extends Model {
     @Id
     private Long id;
     private String name;
     @WhenCreated
     private Instant createdAt;
 
-    public Url() {
+    public Url(String name) {
+        this.name = name;
     }
     public Long getId() {
         return id;

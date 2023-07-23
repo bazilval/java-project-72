@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/application.html}">
+    <section layout:fragment="content">
+        <div class="container-lg mt-5">
+            <h1 class="mb-0">Сайты</h1>
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                    <tr>
+                        <th class="col-1">ID</th>
+                        <th>Имя</th>
+                        <th class="col-2">Последняя проверка</th>
+                        <th class="col-1">Код ответа</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="url : ${urls}" th:object="${url}">
+                        <td th:text="*{id}">1</td>
+                        <td>
+                            <a href="#" th:href="@{'urls/' + *{id}}" th:text="*{name}">www.something.com</a>
+                        </td>
+                        <td th:text="${#temporals.format(lastCheck, 'dd/MM/yyyy HH:mm')}">20/07/2023 18:08</td>
+                        <td>200</td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="...">
+                <ul class="pagination justify-content-center mt-5" th:hidden="${#arrays.length(pages)} == 0">
+                    <li class="page-item" th:classappend="${currentPage} == 1 ? 'disabled'">
+                        <a class="page-link" href="#" th:href="@{/urls/(page=${currentPage - 1})}" tabindex="-1">Previous</a>
+                    </li>
+                    <li th:each="page : ${pages}" class="page-item" th:classappend="${currentPage} == ${page} ? 'active'">
+                        <a class="page-link" href="#" th:href="@{/urls/(page=${page})}" th:text="${page}">1</a>
+                    </li>
+                    <li class="page-item"  th:classappend="${currentPage >= #arrays.length(pages)} ? 'disabled'">
+                        <a class="page-link" href="#" th:href="@{/urls/(page=${currentPage + 1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+</html>

@@ -1,0 +1,38 @@
+2023-07-23 18:14:56 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+truncate table urls [42102-214]
+2023-07-23 18:14:56 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+truncate table urls [42102-214]
+2023-07-23 18:14:56 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+truncate table urls [42102-214]
+2023-07-23 18:14:56 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+truncate table urls [42102-214]
+2023-07-23 18:14:56 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URLS" not found; SQL statement:
+truncate table urls [42102-214]
+2023-07-25 13:24:36 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO url (name, created_at) VALUES\000a('https://www.1.com', '2022-01-01 13:57')\000a[*]('https://www.2.com', '2022-01-01 13:57')\000a('https://www.3.com', '2022-01-01 13:57')\000a('https://www.4.com', '2022-01-01 13:57')\000a('https://www.5.com', '2022-01-01 13:57')\000a('https://www.6.com', '2022-01-01 13:57')\000a('https://www.7.com', '2022-01-01 13:57')\000a('https://www.8.com', '2022-01-01 13:57')\000a('https://www.9.com', '2022-01-01 13:57')\000a('https://www.10.com', '2022-01-01 13:57')\000a('https://www.11.com', '2022-01-01 13:57')\000a('https://www.12.com', '2022-01-01 13:57')\000a('https://www.13.com', '2022-01-01 13:57')\000a('https://www.14.com', '2022-01-01 13:57')\000a('https://www.15.com', '2022-01-01 13:57')\000a('https://www.16.com', '2022-01-01 13:57')\000a('https://www.17.com', '2022-01-01 13:57')\000a('https://www.18.com', '2022-01-01 13:57')\000a('https://www.19.com', '2022-01-01 13:57')\000a('https://www.20.com', '2022-01-01 13:57')"; SQL statement:
+INSERT INTO url (name, created_at) VALUES
+('https://www.1.com', '2022-01-01 13:57')
+('https://www.2.com', '2022-01-01 13:57')
+('https://www.3.com', '2022-01-01 13:57')
+('https://www.4.com', '2022-01-01 13:57')
+('https://www.5.com', '2022-01-01 13:57')
+('https://www.6.com', '2022-01-01 13:57')
+('https://www.7.com', '2022-01-01 13:57')
+('https://www.8.com', '2022-01-01 13:57')
+('https://www.9.com', '2022-01-01 13:57')
+('https://www.10.com', '2022-01-01 13:57')
+('https://www.11.com', '2022-01-01 13:57')
+('https://www.12.com', '2022-01-01 13:57')
+('https://www.13.com', '2022-01-01 13:57')
+('https://www.14.com', '2022-01-01 13:57')
+('https://www.15.com', '2022-01-01 13:57')
+('https://www.16.com', '2022-01-01 13:57')
+('https://www.17.com', '2022-01-01 13:57')
+('https://www.18.com', '2022-01-01 13:57')
+('https://www.19.com', '2022-01-01 13:57')
+('https://www.20.com', '2022-01-01 13:57') [42000-214]
