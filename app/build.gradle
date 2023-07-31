@@ -29,6 +29,7 @@ dependencies {
     implementation 'io.javalin:javalin:5.6.1'
     implementation 'io.javalin:javalin-rendering:5.6.0'
     implementation 'org.slf4j:slf4j-simple:2.0.5'
+    implementation 'com.konghq:unirest-java:3.14.2'
 
     implementation 'org.thymeleaf:thymeleaf:3.1.1.RELEASE'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1'
@@ -47,12 +48,12 @@ dependencies {
 
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.5'
     implementation 'javax.activation:activation:1.1.1'
-    //implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
 
     testImplementation platform('org.junit:junit-bom:5.9.2')
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testImplementation 'io.ebean:ebean-test:13.15.0-jakarta'
     testImplementation 'com.konghq:unirest-java:3.14.2'
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
 }
 
 test {

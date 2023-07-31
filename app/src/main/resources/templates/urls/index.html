@@ -16,10 +16,10 @@
                     <tr th:each="url : ${urls}" th:object="${url}">
                         <td th:text="*{id}">1</td>
                         <td>
-                            <a href="#" th:href="@{'urls/' + *{id}}" th:text="*{name}">www.something.com</a>
+                            <a href="#" th:href="@{/urls/{id}(id=*{id})}" th:text="*{name}">www.something.com</a>
                         </td>
-                        <td th:text="${#temporals.format(lastCheck, 'dd/MM/yyyy HH:mm')}">20/07/2023 18:08</td>
-                        <td>200</td>
+                        <td th:text="${url.getLastCheck() != null ? #temporals.format(url.getLastCheck().getCreatedAt(), 'dd/MM/yyyy HH:mm') : ''}">20/07/2023 18:08</td>
+                        <td th:text="${url.getLastCheck() != null ? url.lastCheck.statusCode : ''}">200</td>
                     </tr>
                 </tbody>
             </table>

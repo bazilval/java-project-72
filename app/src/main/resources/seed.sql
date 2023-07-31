@@ -1,6 +1,6 @@
 INSERT INTO url (name, created_at) VALUES
-('https://www.1.com', '2022-01-01 13:57'),
-('https://www.2.com', '2022-01-01 13:57'),
+('https://hexlet.io', '2022-01-01 13:57'),
+('https://meduza.io', '2022-01-01 13:57'),
 ('https://www.3.com', '2022-01-01 13:57'),
 ('https://www.4.com', '2022-01-01 13:57'),
 ('https://www.5.com', '2022-01-01 13:57'),

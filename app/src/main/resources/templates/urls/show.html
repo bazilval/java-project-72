@@ -18,7 +18,7 @@
                 </tr>
             </table>
             <h2 class="mt-5">Проверки</h2>
-            <form>
+            <form action="/url" th:action="@{/urls/{id}/checks(id=${url.id})}" method="post">
                 <button type="submit" class="h-100 btn btn-primary">Запустить проверку</button>
             </form>
             <table class="table table-bordered table-hover mt-3" th:hidden="${#lists.size(checks)} == 0">
@@ -35,11 +35,11 @@
                 <tbody>
                     <tr th:each="check : ${checks}" th:object="${check}">
                         <td th:text="*{id}">1</td>
-                        <td th:text="*{answerCode}">200</td>
-                        <td th:text="*{title}">some title</td>
-                        <td th:text="*{h1}">some heading</td>
-                        <td th:text="*{description}">some description</td>
-                        <td th:text="${#temporals.format(*{createdAt}, 'dd/MM/yyyy HH:mm')}">20/07/2023 21:21</td>
+                        <td th:text="*{statusCode}">200</td>
+                        <td th:text="${#strings.abbreviate(check.title, 20)}">some title</td>
+                        <td th:text="${#strings.abbreviate(check.h1, 20)}">some heading</td>
+                        <td th:text="${#strings.abbreviate(check.description, 50)}">some description</td>
+                        <td th:text="${#temporals.format(check.createdAt, 'dd/MM/yyyy HH:mm')}">20/07/2023 21:21</td>
                     </tr>
                 </tbody>
             </table>

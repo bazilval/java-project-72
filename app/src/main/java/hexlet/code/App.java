@@ -4,6 +4,8 @@ import hexlet.code.controllers.UrlController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -13,6 +15,7 @@ import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.post;
 
 public final class App {
+    private static final Logger LOGGER = LoggerFactory.getLogger("App");
     private static String getMode() {
         return System.getenv().getOrDefault("APP_ENV", "development");
     }
@@ -40,6 +43,9 @@ public final class App {
                 post(UrlController.createUrl);
                 path("{id}", () -> {
                     get(UrlController.showUrl);
+                    path("/checks", () -> {
+                        post(UrlController.addCheck);
+                    });
                 });
             });
         });
@@ -69,5 +75,6 @@ public final class App {
     public static void main(String[] args) {
         Javalin app = getApp();
         app.start(getPort());
+        LOGGER.info("APP IS STARTED");
     }
 }
