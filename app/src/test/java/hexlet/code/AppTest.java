@@ -138,6 +138,12 @@ class AppTest {
         server.enqueue(new MockResponse().setBody(body));
         server.start();
 
+//        Document document = Jsoup.parse(body);
+//        Element titleElement = document.select("title").first();
+//        String titleValue = titleElement.text();
+//        Element h1Element = document.select("h1").first();
+//        String h1Value = h1Element.text();
+
         HttpUrl name = server.url("/");
         String urlString = name.scheme() + "://" + name.host() + ":" + name.port();
 

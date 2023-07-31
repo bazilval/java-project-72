@@ -15,6 +15,9 @@ import java.util.stream.IntStream;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,9 +127,11 @@ public class UrlController {
             ctx.redirect("/urls/" + id);
             return;
         }
-        String title = getTagValue(body, "title");
-        String h1 = getTagValue(body, "h1");
-        String description = getDescription(body);
+
+        Document document = Jsoup.parse(body);
+        String title = getTagValue(document, "title");
+        String h1 = getTagValue(document, "h1");
+        String description = getDescription(document);
 
         UrlCheck check = new UrlCheck(statusCode, title, h1, description, url);
 
@@ -136,7 +141,6 @@ public class UrlController {
             url.save();
 
             transaction.commit();
-            //LOGGER.info("TRANSACTION SUCCESSFUL");
         }
 
         ctx.sessionAttribute("flash", "Страница успешно проверена");
@@ -148,33 +152,14 @@ public class UrlController {
         LOGGER.info("CHECK IS SUCCESSFUL");
     };
 
-    private static String getTagValue(String body, String tag) {
-        int indexOfEnd = body.indexOf("</" + tag + ">");
+    private static String getTagValue(Document document, String tag) {
+        Element element = document.selectFirst(tag);
 
-        if (indexOfEnd == -1) {
-            return "";
-        }
-
-        String text = body.substring(0, indexOfEnd);
-        int indexOfBegin = text.lastIndexOf(">");
-
-        return text.substring(indexOfBegin + 1);
+        return element != null ? element.text() : "";
     }
-    private static String getDescription(String body) {
-        String beginningTag = "name=\"description\"";
-        int indexOfBegin = body.indexOf(beginningTag);
+    private static String getDescription(Document document) {
+        Element element = document.selectFirst("meta[name=description]");
 
-        if (indexOfBegin == -1) {
-            return "";
-        }
-
-        String text = body.substring(indexOfBegin);
-        String contentAtt = "content=";
-        indexOfBegin = text.indexOf(contentAtt);
-        text = text.substring(indexOfBegin + contentAtt.length() + 1);
-
-        int indexOfEnd = text.indexOf(">");
-
-        return text.substring(0, indexOfEnd - 2);
+        return element != null ? element.attr("content") : "";
     }
 }

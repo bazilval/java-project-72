@@ -45,6 +45,7 @@ dependencies {
     implementation 'io.ebean:ebean-migration:13.9.0'
     implementation 'io.ebean:ebean-annotation:8.4'
     annotationProcessor 'io.ebean:querybean-generator:13.20.1'
+    implementation 'org.jsoup:jsoup:1.16.1'
 
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.5'
     implementation 'javax.activation:activation:1.1.1'
