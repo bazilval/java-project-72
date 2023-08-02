@@ -23,13 +23,15 @@ import org.slf4j.LoggerFactory;
 
 public class UrlController {
     private static final Logger LOGGER = LoggerFactory.getLogger("UrlController");
+
     public static Handler index = ctx -> {
         ctx.attribute("isIndex", true);
         ctx.render("index.html");
         LOGGER.info("INDEX PAGE IS RENDERED");
     };
+
     public static Handler createUrl = ctx -> {
-        String name = ctx.formParam("name");
+        String name = ctx.formParam("url");
         String address;
 
         try {
@@ -44,6 +46,19 @@ public class UrlController {
             ctx.status(HttpStatus.UNPROCESSABLE_CONTENT);
             ctx.render("index.html");
             LOGGER.error("INCORRECT URL");
+            LOGGER.error(e.getMessage());
+            return;
+        }
+
+        Url existingUrl = new QUrl()
+                .name.ieq(name)
+                .findOne();
+        if (existingUrl != null) {
+            ctx.sessionAttribute("flash", "Страница уже существует");
+            ctx.sessionAttribute("flash-type", "success");
+
+            ctx.redirect("/urls");
+            LOGGER.info("URL ALREADY EXISTS");
             return;
         }
 
@@ -56,6 +71,7 @@ public class UrlController {
         ctx.redirect("/urls");
         LOGGER.info("URL ADDED SUCCESSFULLY");
     };
+
     public static Handler listUrls = ctx -> {
         int urlsPerPage = 10;
         int normalizedPage;
@@ -87,6 +103,7 @@ public class UrlController {
         ctx.render("urls/index.html");
         LOGGER.info("URLS PAGE IS RENDERED");
     };
+
     public static Handler showUrl = ctx -> {
         Long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
 
@@ -101,6 +118,7 @@ public class UrlController {
         ctx.render("urls/show.html");
         LOGGER.info("PAGE OF " + url.getName() + " IS RENDERED");
     };
+
     public static Handler addCheck = ctx -> {
         Long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
         String body = "";

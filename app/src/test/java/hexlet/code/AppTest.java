@@ -83,7 +83,7 @@ class AppTest {
 
         HttpResponse<String> response = Unirest
                 .post(baseUrl + "/urls")
-                .field("name", name)
+                .field("url", name)
                 .asString();
 
         assertEquals(302, response.getStatus());
@@ -95,12 +95,28 @@ class AppTest {
         assertNotNull(url);
     }
     @Test
+    void testCreateExistingUrl() {
+        String name = "http://hexlet.io";
+
+        HttpResponse<String> response = Unirest
+                .post(baseUrl + "/urls")
+                .field("url", name)
+                .asString();
+
+        Integer urlCount = new QUrl()
+                .name.ieq("http://hexlet.io")
+                .findList()
+                .size();
+
+        assertEquals(1, urlCount);
+    }
+    @Test
     void testIncorrectCreateUrl() {
         String name = "meduza";
 
         HttpResponse<String> response = Unirest
                 .post(baseUrl + "/urls")
-                .field("name", name)
+                .field("url", name)
                 .asString();
 
         String body = response.getBody();
@@ -112,7 +128,6 @@ class AppTest {
         assertNull(url);
         assertEquals(422, response.getStatus());
     }
-
     @Test
     void testShowUrl() {
         Url url = new QUrl()
@@ -137,12 +152,6 @@ class AppTest {
         String body = Files.readString(file);
         server.enqueue(new MockResponse().setBody(body));
         server.start();
-
-//        Document document = Jsoup.parse(body);
-//        Element titleElement = document.select("title").first();
-//        String titleValue = titleElement.text();
-//        Element h1Element = document.select("h1").first();
-//        String h1Value = h1Element.text();
 
         HttpUrl name = server.url("/");
         String urlString = name.scheme() + "://" + name.host() + ":" + name.port();
