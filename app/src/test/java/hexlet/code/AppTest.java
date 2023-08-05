@@ -45,10 +45,13 @@ class AppTest {
         app.stop();
     }
     @BeforeEach
-    void beforeEach() {
+    void beforeEach() throws IOException {
         Database db = DB.getDefault();
-        //db.truncate("url");
-        db.sqlUpdate("DELETE FROM url;").executeNow();
+
+        Path deleteSQLFile = Path.of("src/test/resources/deleteAll.sql");
+        String deleteSQL = Files.readString(deleteSQLFile);
+        db.sqlUpdate(deleteSQL).executeNow();
+
         Url existingUrl = new Url("http://hexlet.io");
         UrlCheck check = new UrlCheck(200,
                 "Hexlet",

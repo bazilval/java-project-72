@@ -51,7 +51,7 @@ public class UrlController {
         }
 
         Url existingUrl = new QUrl()
-                .name.ieq(name)
+                .name.ieq(address)
                 .findOne();
         if (existingUrl != null) {
             ctx.sessionAttribute("flash", "Страница уже существует");
